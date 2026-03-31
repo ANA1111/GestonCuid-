@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliação Técnica - GestonCuid</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light pb-5">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow border-0 p-4">
+                    <h2 class="fw-bold text-success text-center mb-4">Avaliação Técnica</h2>
+                    <p class="text-center text-muted">Responda com atenção. Nota mínima para aprovação: 7/10.</p>
+                    <hr>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <!-- Questão 1 -->
+                        <div class="mb-4">
+                            <p class="fw-bold">1. Qual a primeira atitude ao presenciar uma queda de idoso?</p>
+                            <input type="radio" name="q1" value="a" required> Levantar o idoso rapidamente.<br>
+                            <input type="radio" name="q1" value="b"> Verificar consciência e respiração sem movê-lo bruscamente.<br>
+                            <input type="radio" name="q1" value="c"> Oferecer água com açúcar imediatamente.
+                        </div>
+
+                        <!-- Questão 2 -->
+                        <div class="mb-4">
+                            <p class="fw-bold">2. O que caracteriza a "Higiene do Sono"?</p>
+                            <input type="radio" name="q2" value="a" required> Rotina com horários fixos e ambiente escuro/silencioso.<br>
+                            <input type="radio" name="q2" value="b"> Dormir com a TV ligada para não se sentir sozinho.<br>
+                            <input type="radio" name="q2" value="c"> Tomar café antes de deitar para relaxar.
+                        </div>
+
+                        <!-- Questão 3 -->
+                        <div class="mb-4">
+                            <p class="fw-bold">3. Qual a forma correta de higienizar a pele de um idoso acamado?</p>
+                            <input type="radio" name="q3" value="a" required> Esfregar com bucha vegetal.<br>
+                            <input type="radio" name="q3" value="b"> Usar álcool 70% em todo o corpo.<br>
+                            <input type="radio" name="q3" value="c"> Usar sabonete neutro e secar bem as dobras da pele.
+                        </div>
+
+                        <!-- Questão 4 -->
+                        <div class="mb-4">
+                            <p class="fw-bold">4. Sobre medicamentos, o cuidador deve:</p>
+                            <input type="radio" name="q4" value="a" required> Alterar a dose se o idoso estiver muito agitado.<br>
+                            <input type="radio" name="q4" value="b"> Seguir rigorosamente a prescrição médica e horários.<br>
+                            <input type="radio" name="q4" value="c"> Oferecer remédios por conta própria se tiver experiência.
+                        </div>
+
+                        <!-- Questão 5 -->
+                        <div class="mb-4">
+                            <p class="fw-bold">5. O que é "Engasgo" e como proceder inicialmente?</p>
+                            <input type="radio" name="q5" value="a" required> Obstrução de vias aéreas; Manobra de Heimlich.<br>
+                            <input type="radio" name="q5" value="b"> Falta de apetite; Oferecer doces.<br>
+                            <input type="radio" name="q5" value="c"> Apenas tossir e esperar passar.
+                        </div>
+
+                        <!-- Adicionei as 5 restantes para completar as 10 -->
+                        <div class="mb-4"><p class="fw-bold">6. Hidratação no idoso deve ser:</p>
+                        <input type="radio" name="q6" value="d" required> Oferecida em pequenas quantidades ao longo do dia, mesmo sem sede.</div>
+                        
+                        <div class="mb-4"><p class="fw-bold">7. Sinais de desidratação incluem:</p>
+                        <input type="radio" name="q7" value="b" required> Boca seca, urina escura e confusão mental.</div>
+
+                        <div class="mb-4"><p class="fw-bold">8. Ao lidar com demência (Alzheimer), o cuidador deve:</p>
+                        <input type="radio" name="q8" value="c" required> Manter a calma, não discutir e usar frases curtas.</div>
+
+                        <div class="mb-4"><p class="fw-bold">9. A alimentação do idoso deve ser preferencialmente:</p>
+                        <input type="radio" name="q9" value="a" required> Rica em fibras e proteínas, conforme orientação nutricional.</div>
+
+                        <div class="mb-4"><p class="fw-bold">10. Para evitar escaras (feridas) em acamados, deve-se:</p>
+                        <input type="radio" name="q10" value="b" required> Realizar a mudança de decúbito (posição) a cada 2 horas.</div>
+
+                        <button type="submit" class="btn btn-success w-100 py-3 fw-bold mt-4">Enviar Avaliação</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

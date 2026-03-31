@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>GestonCuid - Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light pb-5">
+    <div class="container mt-5">
+        <div class="card shadow border-0 p-4">
+            <h2 class="fw-bold text-success mb-4">Dados e Habilidades Técnicas</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="fw-bold">CNPJ</label><input type="text" id="cnpj_campo" class="form-control" value="{{ cnpj }}" readonly></div>
+                    <div class="col-md-6"><label class="fw-bold">Razão Social</label><input type="text" name="razao_social" id="rs" class="form-control" required></div>
+                    <div class="col-md-4"><label class="fw-bold">WhatsApp</label><input type="text" name="telefone" class="form-control" required></div>
+                    <div class="col-md-4"><label class="fw-bold">E-mail</label><input type="email" name="email" class="form-control" required></div>
+                    <div class="col-md-4"><label class="fw-bold">CEP</label><input type="text" name="cep" id="cep" class="form-control" required></div>
+                    
+                    <div class="col-md-4"><label class="fw-bold">Cidade</label><input type="text" name="cidade" id="cidade" class="form-control" required></div>
+                    <div class="col-md-4"><label class="fw-bold">Bairro</label><input type="text" name="bairro" id="bairro" class="form-control" required></div>
+                    <div class="col-md-4"><label class="fw-bold">Logradouro (Rua)</label><input type="text" name="logradouro" id="rua" class="form-control" required></div>
+                </div>
+
+                <hr class="my-4">
+                <h5 class="fw-bold text-primary">Checklist de Habilidades</h5>
+                <div class="row mb-4">
+                    <div class="col-md-3"><input type="checkbox" name="sabe_sonda"> Manipulo Sonda</div>
+                    <div class="col-md-3"><input type="checkbox" name="sabe_banho_leito"> Banho no Leito</div>
+                    <div class="col-md-3"><input type="checkbox" name="sabe_transferencia"> Transferências</div>
+                    <div class="col-md-3"><input type="checkbox" name="exp_alzheimer"> Exp. Alzheimer</div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6"><label>PDF Certificado MEI</label><input type="file" name="doc_mei" class="form-control" required></div>
+                    <div class="col-md-6"><label>PDF Antecedentes</label><input type="file" name="doc_antecedentes" class="form-control" required></div>
+                </div>
+                <button type="submit" class="btn btn-success w-100 fw-bold py-3">FINALIZAR CADASTRO</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Busca CNPJ
+        window.onload = function() {
+            const cnpj = document.getElementById('cnpj_campo').value.replace(/\D/g, '');
+            fetch(`https://publica.cnpj.ws/cnpj/${cnpj}`).then(res => res.json()).then(data => {
+                if(data.razao_social) document.getElementById('rs').value = data.razao_social;
+            });
+        };
+        // Busca CEP
+        document.getElementById('cep').addEventListener('blur', function() {
+            const cep = this.value.replace(/\D/g, '');
+            fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
+                document.getElementById('cidade').value = data.localidade;
+                document.getElementById('bairro').value = data.bairro;
+                document.getElementById('rua').value = data.logradouro;
+            });
+        });
+    </script>
+</body>
+</html>
